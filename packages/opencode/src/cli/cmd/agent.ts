@@ -241,8 +241,8 @@ const AgentListCommand = cmd({
         })
 
         for (const agent of sortedAgents) {
-          process.stdout.write(`${agent.name} (${agent.mode})` + EOL)
-          process.stdout.write(`  ${JSON.stringify(agent.permission, null, 2)}` + EOL)
+          const desc = agent.description?.slice(0, 80) || ""
+          process.stdout.write(`${agent.name} (${agent.mode}) ${desc ? "- " + desc + (agent.description.length > 80 ? "..." : "") : ""}` + EOL)
         }
       },
     })
