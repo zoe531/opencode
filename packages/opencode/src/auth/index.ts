@@ -46,6 +46,7 @@ export namespace Auth {
     const data = await Filesystem.readJson<Record<string, unknown>>(filepath).catch(() => ({}))
     return Object.entries(data).reduce(
       (acc, [key, value]) => {
+        if (key.startsWith("$")) return acc
         const parsed = Info.safeParse(value)
         if (!parsed.success) return acc
         acc[key] = parsed.data
